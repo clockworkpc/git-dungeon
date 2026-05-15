@@ -1,0 +1,30 @@
+id: status-001
+title: Read the Room
+region: Village
+objective: >
+  Your repository has unsaved changes.
+  Run git status to see what's going on.
+initial:
+  branches:
+    master: A
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Initial commit"
+  working_tree:
+    - name: "README.md"
+      status: modified
+    - name: "notes.txt"
+      status: untracked
+goal:
+  shape: command_run
+  command_must_be_run: "git status"
+allowed_commands:
+  - git status
+hints:
+  - "Type: git status"
+explanation: >
+  git status shows the state of your working tree and staging area.
+  Modified files have changes not yet staged. Untracked files are new
+  files Git doesn't know about yet.

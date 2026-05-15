@@ -1,0 +1,36 @@
+id: diverged-001
+title: Two Paths Diverged
+region: Harbor
+objective: >
+  You and a teammate both committed since your last sync.
+  Pull and merge the remote changes into your local branch.
+initial:
+  branches:
+    master: C
+  remote_refs:
+    "origin/master": D
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Shared base"
+    C:
+      parents: [A]
+      message: "Your local work"
+    D:
+      parents: [A]
+      message: "Teammate's push"
+goal:
+  shape: merged_into_main
+  branch: master
+allowed_commands:
+  - git pull
+  - git merge
+  - git status
+hints:
+  - "Run git pull — it will create a merge commit"
+  - "Diverged histories require a merge commit or a rebase"
+explanation: >
+  When local and remote histories diverge, Git cannot fast-forward.
+  A three-way merge finds the common ancestor (A), merges both lines,
+  and creates a new merge commit with two parents.

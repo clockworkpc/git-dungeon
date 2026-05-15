@@ -1,0 +1,33 @@
+id: pull-001
+title: Get the Latest
+region: Harbor
+objective: >
+  A teammate pushed a new commit to origin/master.
+  Pull it into your local branch.
+initial:
+  branches:
+    master: A
+  remote_refs:
+    "origin/master": B
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Initial commit"
+    B:
+      parents: [A]
+      message: "Teammate's feature"
+goal:
+  shape: fast_forwarded
+  branch: master
+  head_at: B
+allowed_commands:
+  - git pull
+  - git status
+hints:
+  - "Use: git pull"
+  - "Since origin/master is ahead, this will fast-forward"
+explanation: >
+  When the remote has commits your local branch doesn't,
+  git pull fetches and fast-forwards your branch pointer.
+  No merge commit is needed when history is linear.

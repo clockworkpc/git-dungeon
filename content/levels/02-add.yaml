@@ -1,0 +1,31 @@
+id: add-001
+title: Stage Your Changes
+region: Village
+objective: >
+  Stage all changes so they are ready to commit.
+  Use git add to move files to the staging area.
+initial:
+  branches:
+    master: A
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Initial commit"
+  working_tree:
+    - name: "login.go"
+      status: modified
+    - name: "test_helpers.go"
+      status: untracked
+goal:
+  shape: working_tree_staged
+  min_staged_files: 2
+allowed_commands:
+  - git add
+  - git status
+hints:
+  - "Use: git add . to stage all files"
+  - "Or stage individually: git add login.go"
+explanation: >
+  git add moves changes from the working tree into the staging area (index).
+  Only staged changes will be included in the next commit.

@@ -1,0 +1,31 @@
+id: commit-001
+title: Capture the Snapshot
+region: Village
+objective: >
+  You have staged changes. Commit them with a message
+  describing what you did.
+initial:
+  branches:
+    master: A
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Initial commit"
+  stage_area:
+    - name: "app.go"
+      status: staged
+goal:
+  shape: has_new_commit
+  branch: master
+  min_new_commits: 1
+allowed_commands:
+  - git commit
+  - git status
+hints:
+  - 'Use: git commit -m "your message"'
+  - "The -m flag sets the commit message"
+explanation: >
+  git commit creates a permanent snapshot of staged changes.
+  Each commit has a unique ID, a message, and a pointer to its parent commit.
+  This is how Git builds the commit graph.

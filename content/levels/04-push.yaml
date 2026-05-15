@@ -1,0 +1,32 @@
+id: push-001
+title: Share Your Work
+region: Harbor
+objective: >
+  You have a local commit that origin doesn't have yet.
+  Push your changes to the remote.
+initial:
+  branches:
+    master: B
+  remote_refs:
+    "origin/master": A
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Initial commit"
+    B:
+      parents: [A]
+      message: "Add feature"
+goal:
+  shape: remote_up_to_date
+  branch: master
+  remote_must_match_local: true
+allowed_commands:
+  - git push
+  - git status
+hints:
+  - "Use: git push origin master"
+  - "Or just: git push"
+explanation: >
+  git push uploads your local commits to the remote repository.
+  The remote ref origin/master is updated to match your local master.

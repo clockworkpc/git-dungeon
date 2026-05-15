@@ -1,0 +1,42 @@
+id: merge-3way-001
+title: Two Streams, One River
+region: Bridge
+objective: >
+  Both master and feature/ui have new commits since they diverged.
+  Merge feature/ui into master, creating a merge commit.
+initial:
+  branches:
+    master: C
+    "feature/ui": E
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Bootstrap"
+    B:
+      parents: [A]
+      message: "Backend API"
+    C:
+      parents: [B]
+      message: "Add auth"
+    D:
+      parents: [B]
+      message: "UI components"
+    E:
+      parents: [D]
+      message: "Style dashboard"
+goal:
+  shape: merged_into_main
+  branch: feature/ui
+allowed_commands:
+  - git checkout
+  - git merge
+  - git status
+hints:
+  - "Checkout master first, then: git merge feature/ui"
+  - "git merge feature/ui will create a merge commit"
+  - "The merge base is commit B"
+explanation: >
+  A three-way merge combines two diverged histories using their
+  common ancestor as a reference point. The result is a new merge commit
+  with two parents, preserving the full branch topology.

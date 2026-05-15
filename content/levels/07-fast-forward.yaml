@@ -1,0 +1,37 @@
+id: merge-ff-001
+title: Fast Lane
+region: Bridge
+objective: >
+  Merge feature/hotfix into master. The branch is strictly
+  ahead of master — a fast-forward merge is possible.
+initial:
+  branches:
+    master: A
+    "feature/hotfix": C
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Release v1.0"
+    B:
+      parents: [A]
+      message: "Fix null pointer"
+    C:
+      parents: [B]
+      message: "Add test for fix"
+goal:
+  shape: fast_forwarded
+  branch: master
+  head_at: C
+  must_not_include_merge_commit: true
+allowed_commands:
+  - git checkout
+  - git merge
+  - git status
+hints:
+  - "Checkout master first, then: git merge feature/hotfix"
+  - "Since feature/hotfix is ahead of master, no merge commit is needed"
+explanation: >
+  A fast-forward merge simply moves the branch pointer forward.
+  This is only possible when the target branch has no new commits
+  since the source branch was created — history stays linear.

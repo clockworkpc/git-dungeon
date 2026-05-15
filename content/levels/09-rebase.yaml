@@ -1,0 +1,42 @@
+id: rebase-001
+title: Rebase Onto Main
+region: Time Tower
+objective: >
+  Move feature/login onto the latest master
+  without creating a merge commit.
+initial:
+  branches:
+    master: C
+    "feature/login": E
+  head: feature/login
+  commits:
+    A:
+      parents: []
+      message: "Bootstrap"
+    B:
+      parents: [A]
+      message: "Core models"
+    C:
+      parents: [B]
+      message: "Add search"
+    D:
+      parents: [B]
+      message: "Login form"
+    E:
+      parents: [D]
+      message: "Login validation"
+goal:
+  branch: feature/login
+  shape: linear_after_main
+  must_not_include_merge_commit: true
+allowed_commands:
+  - git checkout
+  - git rebase
+hints:
+  - "Make sure you are on feature/login"
+  - "git rebase master replays your commits on top of C"
+  - "The result: C -> D' -> E' (linear, no merge commit)"
+explanation: >
+  Rebase replays commits onto a new base. Commits D and E are rewritten
+  as D' and E' with new IDs but the same changes. The branch history
+  becomes linear, making git log easier to read.

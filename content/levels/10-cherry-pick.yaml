@@ -1,0 +1,45 @@
+id: cherry-pick-001
+title: Pick the Winning Commit
+region: Orchard
+objective: >
+  Commit E on feature/experiment contains a critical bugfix.
+  Apply just that commit to master without merging the whole branch.
+initial:
+  branches:
+    master: C
+    "feature/experiment": F
+  head: master
+  commits:
+    A:
+      parents: []
+      message: "Foundation"
+    B:
+      parents: [A]
+      message: "Core feature"
+    C:
+      parents: [B]
+      message: "Polish"
+    D:
+      parents: [B]
+      message: "Experiment start"
+    E:
+      parents: [D]
+      message: "Critical bugfix"
+    F:
+      parents: [E]
+      message: "More experiments"
+goal:
+  branch: master
+  shape: has_new_commit
+  commit_message_contains: "Critical bugfix"
+  min_new_commits: 1
+allowed_commands:
+  - git checkout
+  - git cherry-pick
+hints:
+  - "Find the commit ID for 'Critical bugfix' in the graph (commit E)"
+  - "git cherry-pick E copies just that commit onto master"
+explanation: >
+  Cherry-pick copies a single commit from anywhere in the graph
+  and applies it to your current branch. The new commit has the same
+  changes but a different ID. The original branch is not affected.
